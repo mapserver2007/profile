@@ -1,0 +1,44 @@
+version: '3.1'
+services:
+  php:
+    build: ./php-fpm
+    image: dev/php:20180910
+    container_name: dev-php
+    depends_on:
+      - redis
+      - memcached
+      - mysql
+    ports:
+      - "9000:9000"
+    volumes:
+      - ../apps:/workspace
+    restart: always
+
+  nginx:
+    image: nginx
+    container_name: dev-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+
+  memcached:
+    image: memcached:alpine
+    container_name: dev-memcached
+
+  redis:
+    image: redis:4-alpine
+    container_name: dev-redis
+
+  mysql:
+    build: ./mysql/5.7
+    image: dev/mysql:1
+    container_name: dev-mysql
+    environment:
+      - MYSQL_DATABASE=sandbox
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=root
