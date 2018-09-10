@@ -1,0 +1,5 @@
+infrastructure/**/.vagrant
+setup.retry
+.DS_Store
+sandbox
+Rakefile
