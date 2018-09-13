@@ -1,9 +1,9 @@
 <?php
-namespace WebStream\Test\Helper;
+namespace Profile\Helper;
 
 use WebStream\Core\CoreHelper;
 
-class Test1Helper extends CoreHelper
+class IndexHelper extends CoreHelper
 {
     public function write($list)
     {

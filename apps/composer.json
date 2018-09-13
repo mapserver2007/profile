@@ -5,6 +5,7 @@
         "doctrine/dbal": "2.6.*",
         "twig/twig": "1.*",
         "mustangostang/spyc": "*",
-        "leafo/lessphp": "*"
+        "leafo/lessphp": "*",
+        "cebe/markdown": "~1.2.0"
     }
 }
