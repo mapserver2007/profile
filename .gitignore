@@ -1,4 +1,5 @@
 infrastructure/**/.vagrant
+infrastructure/**/data-volume
 setup.retry
 .DS_Store
 sandbox

@@ -25,9 +25,4 @@ class IndexService extends CoreService
         $reader = new FileReader($this->markdownDir . $filename);
         return $this->markdown->parse($reader->read());
     }
-
-    public function writeMarkdown($s)
-    {
-        return $this->markdown->parse($s);
-    }
 }
