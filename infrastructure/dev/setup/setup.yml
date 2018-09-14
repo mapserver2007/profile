@@ -1,5 +1,5 @@
 ---
-- hosts: webstream-dev
+- hosts: profile-dev
   become: yes
   user: vagrant
   roles:

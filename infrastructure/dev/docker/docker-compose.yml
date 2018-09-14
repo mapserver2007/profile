@@ -35,10 +35,19 @@ services:
 
   mysql:
     build: ./mysql/5.7
-    image: dev/mysql:1
+    image: dev/mysql:20180911
     container_name: dev-mysql
+    volumes:
+    - data-volume:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=sandbox
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
       - MYSQL_ROOT_PASSWORD=root
+
+volumes:
+  data-volume:
+    driver_opts:
+      type: none
+      device: /workspace/data-volume
+      o: bind

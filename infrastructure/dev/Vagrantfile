@@ -15,7 +15,7 @@ end
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   settings = {}
   settings[:ipaddr] = "192.168.0.33"
-  settings[:port] = 2252
+  settings[:port] = 2254
   settings[:workspace_path] = "~/Dropbox/workspace/profile/"
 
   config.vm.define "profile-dev" do |node|
@@ -33,6 +33,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     type: "rsync",
     owner: "vagrant",
     group: "vagrant"
+
+  config.vm.synced_folder settings[:workspace_path] + "apps", "/workspace/apps",
+    type: "rsync",
+    owner: "vagrant",
+    group: "vagrant",
+    rsync__exclude: [".git/", "sandbox/", "vendor/", settings[:workspace_path] + "apps/log/"]
+
+  config.vm.synced_folder settings[:workspace_path] + "infrastructure/dev/data-volume", "/workspace/data-volume-backup/",
+    type: "virtualbox",
+    owner: "vagrant",
+    group: "vagrant",
+    rsync__exclude: [".gitkeep"]
+
+  config.vm.synced_folder settings[:workspace_path] + "infrastructure/dev/docker", "/workspace/infrastructure/",
+    type: "rsync",
+    owner: "vagrant",
+    group: "vagrant",
+    rsync__exclude: [".git/", "sandbox/", "vendor/"]
 
   config.vm.provision :ansible_local do |ansible|
     ansible.compatibility_mode = '2.0'
